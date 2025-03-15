@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'userapp.apps.UserappConfig',
+    'goodsapp.apps.GoodsappConfig',
+    'cartapp.apps.CartappConfig',
+    'orderapp.apps.OrderappConfig',
+    'goodsapp',
+    'userapp',
+    'cartapp',
+    'orderapp'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +83,12 @@ WSGI_APPLICATION = 'Campus_E_Mall.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Campus_E_Mall',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'HOST': '127.0.0.1',
+        'USER': '3306',
+        'PASSWORD': '123456'
     }
 }
 
@@ -116,6 +128,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static', 'css'),
+    os.path.join(BASE_DIR, 'static', 'images'),
+    os.path.join(BASE_DIR, 'static', 'js'),
+]
+
+MEDIA_ROOT = '/media/'
+
+MEDIA_URL = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

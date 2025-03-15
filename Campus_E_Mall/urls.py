@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.staticfiles.views import serve
+from django.template.defaulttags import url
 from django.urls import path
+
+from Campus_E_Mall.settings import DEBUG, MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+if DEBUG:
+    urlpatterns.append(url(r'^/media/(?P<path>.*)$', serve, {'document_root':MEDIA_ROOT}),)
